@@ -3,9 +3,9 @@
 #include<ESP8266HTTPClient.h>
 #include<WiFiClient.h>
 
-const char* ssid = "KLaZ";
-const char* password = "senyumDulu";
-const char* serverName = "http://192.168.149.9/logging-data/sensor.php";
+const char* ssid = "Warmindo Remen";
+const char* password = "AA@yomi01";
+const char* serverName = "http://192.168.18.7/logging-data/sensor.php";
 String apiKeyValue = "123456789";
 
 int ledmerah = 5; //D1
@@ -40,11 +40,12 @@ void setup() {
   WiFi.begin(ssid, password);
   while(WiFi.status() != WL_CONNECTED){
     delay(500);
-    Serial.print(".");
+    Serial.println("WIFI belum connect :)");
   }
   Serial.println("");
   Serial.print("Terhubung ke alamat : ");
-  Serial.print(WiFi.localIP());
+  Serial.println(WiFi.localIP());
+  Serial.println("----------------------------------------------");
 
   pinMode(ledmerah,OUTPUT);
   pinMode(ledhijau, OUTPUT);
@@ -80,12 +81,12 @@ void sensor()
   {
     timer = 10000;
     status = "JalananPadat";
-    Serial.print("hijau lama\n");
+    Serial.println("Jalanan Lagi Padat (nyala hijau lebih lama)");
   }
   else{
     timer = 5000;
     status = "JalananSepi";
-    Serial.print("hijau saja\n");
+    Serial.println("Jalanan Lagi Sepi (nyala hijau lebih seperti biasa)");
   }
 
 
@@ -101,12 +102,11 @@ void loop() {
     digitalWrite(ledkuning, LOW);
 
     start_waktu = now(); 
-    delay(4800);
     sensor();
+    delay(4800);
     akhir_waktu = now();
-
     durasi = (akhir_waktu - start_waktu);
-    Serial.println("\n=====================");
+    Serial.println("");
     Serial.print("durasi merah : ");
     Serial.println(second(durasi));
 
@@ -114,12 +114,11 @@ void loop() {
     digitalWrite(ledkuning, HIGH);
     digitalWrite(ledhijau, LOW);
     digitalWrite(ledmerah, LOW);
+
     start_waktu = now(); 
     delay(1000);
     akhir_waktu = now();
-
     durasi = (akhir_waktu - start_waktu);
-    Serial.println("\n=====================");
     Serial.print("durasi kuning : ");
     Serial.println(second(durasi));
 
@@ -138,7 +137,6 @@ void loop() {
 
     WiFiClient wifiClient;
     HTTPClient http;
-
     String address;
 
     address = String(serverName);
