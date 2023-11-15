@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $sensor2 = test_input($_GET["sensor2"]);
         $status = test_input($_GET["status"]);
 
-        $status = ($status == "JalananSepi") ? "Jalanan Sepi" : "Jalanan Padat";
+        $status = ($status == "JalananSepi") ? "Jalan Sepi" : "Jalan Padat";
         
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Check connection
