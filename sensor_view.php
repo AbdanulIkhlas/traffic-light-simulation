@@ -43,6 +43,7 @@
         $row_sensor1 = $row["sensor1"];
         $row_sensor2 = $row["sensor2"];
         $row_status = $row["status"];
+        $row_waktu = $row["waktu"];
         }
         ?>
         <?php
@@ -72,7 +73,7 @@
             </div>
 
             <!-- container terbaru-->
-            <div class="rounded-2xl border-4 border-gray-600 w-2/5 mx-auto mt-10 bg-slate-100 p-5 ">
+            <div class="rounded-2xl border-4 border-gray-600 w-3/5 mx-auto mt-10 bg-slate-100 p-5 ">
                 <!-- content -->
                 <div>
                     <h1 class="text-center text-3xl font-bold mb-7">TERBARU</h1>
@@ -82,6 +83,7 @@
                             <th>SENSOR 1</th>
                             <th>SENSOR 2</th>
                             <th>STATUS</th>
+                            <th>WAKTU</th>
                         </thead>
                         <tbody>
                             <tr>
@@ -89,6 +91,7 @@
                                 <td><?php echo $row_sensor1 ?></td>
                                 <td><?php echo $row_sensor2 ?></td>
                                 <td><?php echo $row_status ?></td>
+                                <td><?php echo $row_waktu ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,7 +100,7 @@
 
 
             <!-- container overall -->
-            <div class="rounded-2xl border-4 border-gray-600 w-2/5 h-72 mx-auto mt-14 bg-slate-100 p-5 ">
+            <div class="rounded-2xl border-4 border-gray-600 w-3/5 h-72 mx-auto mt-14 bg-slate-100 p-5 ">
                 <!-- content -->
                 <?php 
                 $sql2 = "SELECT * FROM sensor ORDER BY id DESC";
@@ -106,10 +109,11 @@
                     <h1 class="text-center text-3xl font-bold mb-7">OVERALL</h1>
                     <!-- judul tabel (sticky)-->
                     <div class="flex font-bold border-2 border-black">
-                        <h1 class="ml-14">ID</h1>
-                        <h1 class="ml-24">SENSOR 1</h1>
-                        <h1 class="ml-16">SENSOR 2</h1>
-                        <h1 class="ml-16">STATUS</h1>
+                        <h1 class="ml-20">ID</h1>
+                        <h1 class="ml-32">SENSOR 1</h1>
+                        <h1 class="ml-24">SENSOR 2</h1>
+                        <h1 class="ml-24">STATUS</h1>
+                        <h1 class="ml-28">WAKTU</h1>
                     </div>
                     <!-- container tabel -->
                     <div class="border-2 border-black border-t-transparent h-36 overflow-y-auto">
@@ -121,6 +125,7 @@
                                 $row_sensor1 = $row["sensor1"];
                                 $row_sensor2 = $row["sensor2"];
                                 $row_status = $row["status"];
+                                $row_waktu = $row["waktu"];
                             ?>
 
                             <tr>
@@ -128,6 +133,7 @@
                                 <td><?php echo $row_sensor1 ?></td>
                                 <td><?php echo $row_sensor2 ?></td>
                                 <td><?php echo $row_status ?></td>
+                                <td><?php echo $row_waktu ?></td>
                             </tr>
 
                             <?php
