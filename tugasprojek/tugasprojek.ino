@@ -6,19 +6,22 @@
 const char* ssid = "Warmindo Remen";
 const char* password = "AA@yomi01";
 const char* serverName = "http://192.168.18.7/logging-data/sensor.php";
+// const char* ssid = "KLaZ";
+// const char* password = "senyumDulu";
+// const char* serverName = "http://192.168.112.9/logging-data/sensor.php";
 String apiKeyValue = "123456789";
 
 int ledmerah = 5; //D1
 int ledhijau = 4; //D2
-int ledkuning = 13; //D7
+int ledkuning = 2; //D4
 
-//ga ada kabel merah
-int echo1 = 2; //D4
-int trigger1 = 0; //D3
+//ada kabel kuning dan orange
+int echo1 = 14; //D5
+int trigger1 = 12; //D6
 
-//ada kabel merah
-int echo2 = 12; //D6
-int trigger2 = 14; //D5
+//gak ada kabel kuning dan orange
+int echo2 = 13; //D7
+int trigger2 = 15; //D8
 
 int durasi1;
 int jarak1;
@@ -64,6 +67,7 @@ void sensor()
   durasi1 = pulseIn(echo1, HIGH);
   jarak1 = (durasi1 *0.034)/2;
 
+  delay(100);
   
   digitalWrite(trigger2,HIGH);
   delay(100);
@@ -103,12 +107,31 @@ void loop() {
 
     start_waktu = now(); 
     sensor();
-    delay(4800);
+    delay(4700);
     akhir_waktu = now();
     durasi = (akhir_waktu - start_waktu);
     Serial.println("");
     Serial.print("durasi merah : ");
     Serial.println(second(durasi));
+
+    WiFiClient wifiClient;
+    HTTPClient http;
+    String address;
+
+    address = String(serverName);
+    address += "?api_key=";
+    address += String(apiKeyValue);
+    address += "&sensor1=";
+    address += String(jarak1);
+    address += "&sensor2=";
+    address += String(jarak2);
+    address += "&status=";
+    address += String(status);
+
+    // Serial.print("adress : ");
+    // Serial.println(address);
+    http.begin(wifiClient, address);
+    int statusCode = http.GET();
 
     //lampu kuning nyala
     digitalWrite(ledkuning, HIGH);
@@ -135,24 +158,7 @@ void loop() {
     Serial.println(second(durasi));
     Serial.println("\n=====================");
 
-    WiFiClient wifiClient;
-    HTTPClient http;
-    String address;
-
-    address = String(serverName);
-    address += "?api_key=";
-    address += String(apiKeyValue);
-    address += "&sensor1=";
-    address += String(jarak1);
-    address += "&sensor2=";
-    address += String(jarak2);
-    address += "&status=";
-    address += String(status);
-
-    Serial.print("adress : ");
-    Serial.println(address);
-    http.begin(wifiClient, address);
-    int statusCode = http.GET();
+    
     if(statusCode > 0){
       Serial.print("HTTP Response Code : ");
       Serial.println(statusCode);
