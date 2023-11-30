@@ -3,12 +3,12 @@
 #include<ESP8266HTTPClient.h>
 #include<WiFiClient.h>
 
-const char* ssid = "Warmindo Remen";
-const char* password = "AA@yomi01";
-const char* serverName = "http://192.168.18.7/logging-data/sensor.php";
-// const char* ssid = "KLaZ";
-// const char* password = "senyumDulu";
-// const char* serverName = "http://192.168.112.9/logging-data/sensor.php";
+// const char* ssid = "Warmindo Remen";
+// const char* password = "AA@yomi01";
+// const char* serverName = "http://192.168.18.7/logging-data/sensor.php";
+const char* ssid = "KLaZ";
+const char* password = "senyumDulu";
+const char* serverName = "http://192.168.213.9/logging-data/sensor.php";
 String apiKeyValue = "123456789";
 
 int ledmerah = 5; //D1
@@ -81,14 +81,14 @@ void sensor()
   Serial.println(jarak2);
   Serial.print("\n");
 
-  if(jarak1 < 50 && jarak2 < 50)
+  if(jarak1 < 15 && jarak2 < 15)
   {
-    timer = 10000;
+    timer = 15000;
     status = "JalananPadat";
     Serial.println("Jalanan Lagi Padat (nyala hijau lebih lama)");
   }
   else{
-    timer = 5000;
+    timer = 10000;
     status = "JalananSepi";
     Serial.println("Jalanan Lagi Sepi (nyala hijau lebih seperti biasa)");
   }
@@ -107,7 +107,7 @@ void loop() {
 
     start_waktu = now(); 
     sensor();
-    delay(4700);
+    delay(9700);
     akhir_waktu = now();
     durasi = (akhir_waktu - start_waktu);
     Serial.println("");
@@ -139,7 +139,7 @@ void loop() {
     digitalWrite(ledmerah, LOW);
 
     start_waktu = now(); 
-    delay(1000);
+    delay(2000);
     akhir_waktu = now();
     durasi = (akhir_waktu - start_waktu);
     Serial.print("durasi kuning : ");
@@ -156,6 +156,20 @@ void loop() {
     durasi = (akhir_waktu - start_waktu);
     Serial.print("durasi hijau : ");
     Serial.println(second(durasi));
+
+
+    //lampu kuning nyala
+    digitalWrite(ledkuning, HIGH);
+    digitalWrite(ledhijau, LOW);
+    digitalWrite(ledmerah, LOW);
+
+    start_waktu = now(); 
+    delay(2000);
+    akhir_waktu = now();
+    durasi = (akhir_waktu - start_waktu);
+    Serial.print("durasi kuning : ");
+    Serial.println(second(durasi));
+
     Serial.println("\n=====================");
 
     
